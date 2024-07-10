@@ -1,6 +1,7 @@
 "use client"
 import ButtonComponent from "@/components/button/ButtonComponent";
 import UserInput from "@/components/inputcomp/UserInput";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -10,7 +11,8 @@ const SignInPage: React.FC = () => {
 
   const router = useRouter();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     router.push("/dashboard");
   };
 
@@ -25,15 +27,14 @@ const SignInPage: React.FC = () => {
             label="Email"
             placeholder="example@email.com"
             onChange={(e) => setEmail(e.target.value)}
-            type="text"
-          />
+            type="text" value={email}          />
           <UserInput
             label="Password"
             placeholder="Pass@word123!"
             onChange={(e) => setPassword(e.target.value)}
-            type="password"
-          />
-          <ButtonComponent label="Sign In" handleClick={handleSubmit} />
+            type="password" value={password}          />
+          <ButtonComponent label="Sign In" />
+          <Link href="/dashboard" className="text-blue-600 underline">forgot a password?</Link>
         </form>
       </div>
     </div>
